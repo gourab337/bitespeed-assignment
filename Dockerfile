@@ -12,5 +12,5 @@ RUN python3 -m venv .venv
 RUN . .venv/bin/activate
 RUN pip3 install -r requirements.txt --break-system-packages
 RUN python3 run_db_query.py
-RUN python3 identity_reco.py
 EXPOSE 3232
+CMD ["python3", "identity_reco.py"]
