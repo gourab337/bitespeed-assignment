@@ -10,13 +10,15 @@ def validations(json_body):
         return 0
     # Type validations
     for index, field in enumerate(json_body):
-        if index == 0 and field.decode() != 'email':
+        # Use field.decode() in case it breaks
+        if index == 0 and field != 'email':
             return 0
-        if index == 1 and field.decode() != 'phoneNumber':
+        if index == 1 and field != 'phoneNumber':
             return 0
-        if field.decode() == 'email' and type(json_body[b'email']) != str:
+        # Use json_body[b'email'] in case the code breaks
+        if field == 'email' and type(json_body['email']) != str:
             return 0
-        if field.decode() == 'phoneNumber' and type(json_body[b'phoneNumber']) != str:
+        if field == 'phoneNumber' and type(json_body['phoneNumber']) != str:
             return 0
     return 1
 
@@ -28,8 +30,9 @@ def store_in_db(json_body):
     order_id += 1  # incrementing prev order id by 1 for new order
     if err is not None:
         return err
-    phone_number = json_body[b'phoneNumber']
-    email = json_body[b'email']
+    # Use json_body[b'phoneNumber'] in case code breaks
+    phone_number = json_body['phoneNumber']
+    email = json_body['email']
     linked_id, err = linked_id_finder(phone_number, email)
     if err is not None:
         return err

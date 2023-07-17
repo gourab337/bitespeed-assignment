@@ -24,4 +24,4 @@ async def root(input_json: JSONStructure = None):
 
 
 if __name__ == "__main__":
-    uvicorn.run("identity_reco:app", reload=True, port=3232)
+    uvicorn.run("identity_reco:app", reload=True, host='0.0.0.0', port=3232)
